@@ -85,7 +85,7 @@ void getIMUString(String* oneLiner)
   *oneLiner += gz;
   *oneLiner += ";\n";
   
-  Serial.println(startMillis - prevMillis);
+  //Serial.println(startMillis - prevMillis);
   prevMillis = startMillis;
 }
 
