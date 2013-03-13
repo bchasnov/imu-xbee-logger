@@ -1,0 +1,19 @@
+ICEX 2013
+
+XBee A:
+PAN ID: 3332, Programming Radio
+DL ID: FFFF
+MY ID: 0000
+S/N high 13A200
+S/N low: 409FCCAC
+Firmware 10EC
+Baud rate: 57600
+
+XBee B:
+PAN ID: 3332, Arduino Fio Radio
+DL ID: 0000
+MY ID: 0001
+S/N high: 13A200
+S/N low: 409FD198
+Firmware 10EC
+

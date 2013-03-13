@@ -1,0 +1,37 @@
+===================
+Fio:
+===================
+
+
+
+===================
+SD card breakout board https://www.sparkfun.com/products/544:
+===================
+CD  - N/A
+DO  - MISO
+GND - GND
+SCK - Digital 13
+VCC - 3.3V
+DS  - MOSI
+CS  - Digial x
+
+
+
+===================
+RTC: http://www.l8ter.com/?p=375
+===================
+GND  - GND
+VCC  - 3.3v
+SQW  - GND
+CLK  - Digial 13
+MISO - Digial 12
+MOSI - Digial 11
+SS   - Digital x
+
+===================
+IMU https://www.sparkfun.com/products/10724:
+===================
+VCC - >3.5v
+GND - GND
+SDA - Analog 4
+SCL - Analog 5
