@@ -1,37 +1,59 @@
+#include "Wire.h"
+
 #include "ADXL345.h"
 #include <HMC5883L.h>
+#include <ITG3200.h>
 
 ADXL345 Accel;
 HMC5883L compass;
+ITG3200 gyro = ITG3200();
 
 int error = 0;
 
 void initIMU()
 {
+  Wire.begin();
+  //////accel
   Accel.set_bw(ADXL345_BW_100);
   Serial.print("BW_OK? ");
   Serial.println(Accel.status, DEC);
-
+  //////end accel/////////////////////
+  
+  //////////compass
   compass = HMC5883L(); // Construct a new HMC5883 compass.
   error = compass.SetMeasurementMode(Measurement_Continuous);
   
   if(error != 0){ // If there is an error, print it out.
     Serial.println(compass.GetErrorText(error));
   }
+  
+  ///////end compass//////////////////////
+  
+  ////////gyro
+  gyro.init(ITG3200_ADDR_AD0_LOW); 
+  
+  //Serial.print("zeroCalibrating...");
+  //gyro.zeroCalibrate(2500, 2);
+  Serial.println("done.");
+  
+  /////end gyro/////////////////////////
+
 
 }
-
+unsigned long prevMillis = 0;
 void getIMUString(String* oneLiner)
 {
-  *oneLiner = "";
+  *oneLiner = ">";
 
   //Read Accelerometer
   int acc_data[3];
+  int gx, gy, gz;
   
-  int startMillis = millis();
+  unsigned long startMillis = millis();
   Accel.readAccel(acc_data);
-  MagnetometerRaw raw = compass.ReadRawAxis();  
-  int endMillis = millis();
+  MagnetometerRaw raw = compass.ReadRawAxis(); 
+  gyro.readGyroRaw(&gx, &gy, &gz);
+  unsigned long endMillis = millis();
   
   if(!Accel.status){
     acc_data[0] = 0;
@@ -56,9 +78,15 @@ void getIMUString(String* oneLiner)
   *oneLiner += ",";
   *oneLiner += raw.ZAxis;
   *oneLiner += ";";
- 
- 
+  *oneLiner += gx;
+  *oneLiner += ",";
+  *oneLiner += gy;
+  *oneLiner += ",";
+  *oneLiner += gz;
+  *oneLiner += ";\n";
   
+  Serial.println(startMillis - prevMillis);
+  prevMillis = startMillis;
 }
 
 
