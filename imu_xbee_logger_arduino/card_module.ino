@@ -53,11 +53,8 @@ void initCard()
 
 String dataString = "";
 
-void cardLog()
+void cardLog(char* liner)
 {
-  // make a string for assembling the data to log:
-  dataString = "";
-  dataString += oneLiner;
 
   // open the file. note that only one file can be open at a time,
   // so you have to close this one before opening another.
@@ -65,7 +62,7 @@ void cardLog()
 
 	  // if the file is available, write to it:
   if (dataFile) {
-    dataFile.println(dataString);
+    dataFile.write(liner);
     dataFile.close();
     // print to the serial port too:
     //Serial.println(dataString);
