@@ -17,6 +17,7 @@ void initIMU()
   Accel.set_bw(ADXL345_BW_100);
   Serial.print("BW_OK? ");
   Serial.println(Accel.status, DEC);
+  Accel.powerOn();
   //////end accel/////////////////////
   
   //////////compass
@@ -61,7 +62,7 @@ void getIMUString(String* oneLiner)
     acc_data[2] = 0;
     //Error!
   }
-  
+
   *oneLiner += startMillis;
   *oneLiner += ",";
   *oneLiner += endMillis;
