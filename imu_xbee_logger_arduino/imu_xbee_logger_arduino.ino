@@ -7,20 +7,23 @@ void setup(){
   
   delay(1000);
 }
-String oneLiner = "";
-String multiLiner = "";
+char oneLiner[500];
+char multiLiner[1000];
+int idx = 0;
 int loopCount = 0;
 void loop(){
   loopCount += 1;
-  oneLiner = "";
-  getIMUString(&oneLiner);
-  cardLog();
+  getIMUString(oneLiner);
+  Serial.write(oneLiner);
+  //cardLog();
   //multiLiner += oneLiner;
   if(loopCount >= 10)
   {
-    //Serial.print(multiLiner);
+    Serial.write(multiLiner);
     //cardLog();
-    loopCount = 0;
+    
+    multiLiner[0] = '\0';
+    idx = 0;
   }
 }
 

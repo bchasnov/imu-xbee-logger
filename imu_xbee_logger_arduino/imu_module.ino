@@ -42,9 +42,8 @@ void initIMU()
 
 }
 unsigned long prevMillis = 0;
-void getIMUString(String* oneLiner)
+void getIMUString(char* oneLiner)
 {
-  *oneLiner = ">";
 
   //Read Accelerometer
   int acc_data[3];
@@ -63,28 +62,10 @@ void getIMUString(String* oneLiner)
     //Error!
   }
 
-  *oneLiner += startMillis;
-  *oneLiner += ",";
-  *oneLiner += endMillis;
-  *oneLiner += ";";
-  *oneLiner += acc_data[0];
-  *oneLiner += ",";
-  *oneLiner += acc_data[1];
-  *oneLiner += ",";
-  *oneLiner += acc_data[2];  
-  *oneLiner += ";";
-  *oneLiner += raw.XAxis;
-  *oneLiner += ",";
-  *oneLiner += raw.YAxis;
-  *oneLiner += ",";
-  *oneLiner += raw.ZAxis;
-  *oneLiner += ";";
-  *oneLiner += gx;
-  *oneLiner += ",";
-  *oneLiner += gy;
-  *oneLiner += ",";
-  *oneLiner += gz;
-  *oneLiner += ";\n";
+  sprintf(oneLiner, ">%lu %lu %i %i %i %i %i %i %i %i %i\n", startMillis, endMillis,
+                                                        acc_data[0], acc_data[1], acc_data[2],
+                                                        raw.XAxis, raw.YAxis, raw.ZAxis,
+                                                        gx, gy, gz);
   
   //Serial.println(startMillis - prevMillis);
   prevMillis = startMillis;
