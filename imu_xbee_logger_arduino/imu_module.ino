@@ -60,8 +60,9 @@ void getIMUString(char* liner, int& index)
     acc_data[2] = 0;
     //Error!
   }
-
-  sprintf(liner + index, ">%lu %lu %i %i %i %i %i %i %i %i %i\n", startMillis, endMillis,
+  //">%lu %lu %i %i %i %i %i %i %i %i %i\n"
+  sprintf(liner + index, ">%lu %lu %i %i %i %i %i %i %i %i %i\n", 
+                                                        startMillis, endMillis,
                                                         acc_data[0], acc_data[1], acc_data[2],
                                                         raw.XAxis, raw.YAxis, raw.ZAxis,
                                                         gx, gy, gz);
